@@ -13,9 +13,7 @@ class cat_torrent:
         self.torrentlist = []
         self.list2 = []
         self.regex = '<a style="margin-top: auto;" .*? title="Magnet torrent" href="(.*?)" .*? fa-magnet"></i></a>'
-        # self.url1 = purl
 
-    # 开始爬取当前页面的torrent
     def spider_torrent(self, url):
         for i in range(10):
             try:
@@ -33,21 +31,16 @@ class cat_torrent:
                 print('Retry')
                 time.sleep(random.uniform(0,2))
 
-    # torrent写入txt
     def torrent_write_txt(self, tag):
         for i in self.torrentlist:
             with open('{}.txt'.format(tag), "a+") as f:
                 f.write(i + '\n')
 
-    # num = "https://www.141jav.com/tag/Pantyhose?page=2"
-    # num = "https://www.141jav.com/tag/Restraints?page=2"
     def run(self, tag, num):
         print("开始时间" + time.ctime())
         start_time = time.time()
         for i in range(1, num+1):
             url = self.url.format(tag) + '?page={}'.format(i)
-            # "https://www.141jav.com/tag/{search_url}" + ?page={num = 1 }
-            # "https://www.141jav.com/tag/Pantyhose?page=1"
             self.spider_torrent(url)
             if not self.torrentlist:
                 print("当前页面是空的")

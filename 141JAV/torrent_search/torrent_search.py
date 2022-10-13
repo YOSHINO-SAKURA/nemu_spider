@@ -12,10 +12,8 @@ class cat_torrent:
         self.list2 = []
         self.regex = '<a style="margin-top: auto;" .*? title="Magnet torrent" href="(.*?)" .*? fa-magnet"></i></a>'
         self.num = 1
-        # self.url1 = purl
-        # self.num = "https://www.141jav.com/tag/Pantyhose?page=2"
+       
 
-    # 开始爬取当前页面的torrent
     def spider_torrent(self, url):
         for i in range(10):
             try:
@@ -32,7 +30,7 @@ class cat_torrent:
                 print(e)
                 print('Retry')
 
-    # torrent写入txt
+
     def torrent_write_txt(self, search):
         for i in self.torrentlist:
             with open('{}.txt'.format(search), "a+") as f:
@@ -43,7 +41,6 @@ class cat_torrent:
         start_time = time.time()
         while True:
             url = "https://www.141jav.com/search/"+search + "?page=" + str(self.num)
-            # "https://www.141jav.com/search/FGMT"
             self.spider_torrent(url)
 
             if not self.torrentlist:

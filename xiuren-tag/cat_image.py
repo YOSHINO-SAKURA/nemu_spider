@@ -6,19 +6,17 @@ import requests
 from fake_useragent import UserAgent
 
 
-# https://www.xiurenb.cc/plus/search/index.asp?keyword=
 
 
 class Cat_Search_XiuRen_Image():
     def __init__(self, search):
         self.headers = {"User-Agent": UserAgent(verify_ssl=False).random}
         self.http = 'https://www.xiurenb.cc/'
-        self.search_url = "https://www.xiurenb.cc/plus/search/index.asp?keyword="  # XiuRen/10309
+        self.search_url = "https://www.xiurenb.cc/plus/search/index.asp?keyword=" 
         self.search = search
         self.name = ''
         self.list_url1 = []
         self.num = 0
-        # ['IMiss/10324', 'MFStar/10322']
         self.list_img1 = []
         self.count = 0
         self.url_pgnum = 1
@@ -31,8 +29,7 @@ class Cat_Search_XiuRen_Image():
             os.mkdir("img")
             return print("已创建img文件夹")
 
-    # 获取这搜索页面并且将获得的网址丢到列表里：
-    # 获得名字
+
     def cat_url_list(self, url):
         try:
             for j in range(15):
@@ -55,7 +52,7 @@ class Cat_Search_XiuRen_Image():
             print(e)
             print('Retry')
 
-    # 获得单个网址的图片并加载到列表里：
+
     def get_image_url(self, url):
         try:
             for z in range(15):
@@ -88,11 +85,10 @@ class Cat_Search_XiuRen_Image():
             print(e)
             print('Retry')
 
-    # 下载图片：
+
 
 
     def down_image(self, image, tags):
-            # https://p.xiurenb.cc/uploadfile/202210/12/9F164738753.jpg
             http = 'https://p.xiurenb.cc/uploadfile/'
             directory = "img/{}/".format(tags)
             if os.path.exists(directory):
@@ -120,7 +116,6 @@ class Cat_Search_XiuRen_Image():
         print("开始时间" + time.ctime())
         start_time = time.time()
         self.mk_img_dir()
-        # 这循环是获得搜索后的所有页数的链接
         while True:
             url2 = self.search_url + self.search + \
                 '&searchtype=title&p=' + str(self.url_pgnum)
@@ -138,8 +133,7 @@ class Cat_Search_XiuRen_Image():
             url = self.http + i + '.html'
             self.get_image_url(url)
             self.num = 0
-            # https://www.xiurenb.cc/plus/search/index.asp?keyword=黑丝&searchtype=title&p=1
-            # 这个循环是获得一个图片链接中的所有图片链接
+
             while True:
                 url3 = self.http + i + '_{}.html'.format(self.img_pgnum)
                 self.get_image_url(url3)
